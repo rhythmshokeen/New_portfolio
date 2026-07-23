@@ -1,0 +1,25 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: background 0.2s ease;
+}
+
+.cursorText {
+  background: #ffffff;
+  mix-blend-mode: difference;
+}
+
+@media (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}

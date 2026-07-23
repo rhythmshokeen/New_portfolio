@@ -1,7 +1,16 @@
+@import 'tailwindcss';
+
 :root {
   --font-inter: 'Inter', sans-serif;
-  --bg-color: #050505;
+  --bg-color: #000000;
   --text-color: #ffffff;
+
+  /* Cyber-Cinematic Colors */
+  --accent-orange: #FF5E0E;
+  --accent-blue: #4A90E2;
+  --accent-green: #00E5A0;
+  --dark-glass: rgba(10, 10, 10, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -21,10 +30,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
 }
 
 a {

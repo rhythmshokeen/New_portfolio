@@ -1,0 +1,294 @@
+.section {
+  position: relative;
+  width: 100%;
+  background-color: #000000;
+  padding: 8rem 2rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.ambientLight {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(255, 94, 14, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.header {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.sectionLabel {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: #ff5e0e;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 94, 14, 0.2);
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.4);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* ─── Grid ─── */
+.grid {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  perspective: 1000px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Alternate vertical offsets to create a beautiful staggered layout */
+.grid > div:nth-child(even) {
+  margin-top: 3rem;
+}
+
+/* ─── Card Design ─── */
+.card {
+  position: relative;
+  background: rgba(10, 10, 10, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 3.5rem 3rem;
+  aspect-ratio: 1 / 1.15;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  transition: border-color 0.4s ease, background 0.3s ease;
+  will-change: transform;
+  --mouse-x: -999px;
+  --mouse-y: -999px;
+}
+
+/* Blueprint Grid Background Pattern on Hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(74, 144, 226, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 144, 226, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover {
+  border-color: rgba(74, 144, 226, 0.35);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(74, 144, 226, 0.08), rgba(10, 10, 10, 0.95) 60%);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Corner registration marks for blueprint aesthetic */
+.cornerMark {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-style: solid;
+  transition: border-color 0.4s ease;
+  z-index: 3;
+}
+
+.card:hover .cornerMark {
+  border-color: #4a90e2;
+}
+
+.cornerTopLeft {
+  top: 15px;
+  left: 15px;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.cornerTopRight {
+  top: 15px;
+  right: 15px;
+  border-width: 1.5px 1.5px 0 0;
+}
+
+.cornerBottomLeft {
+  bottom: 15px;
+  left: 15px;
+  border-width: 0 0 1.5px 1.5px;
+}
+
+.cornerBottomRight {
+  bottom: 15px;
+  right: 15px;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+/* Glow gradient on mouse hovering */
+.glowEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(74, 144, 226, 0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card:hover .glowEffect {
+  opacity: 1;
+}
+
+/* Ghost Card Index */
+.cardIndex {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  font-family: var(--font-inter), monospace;
+  font-size: 5rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.015);
+  line-height: 1;
+  transition: color 0.4s ease, transform 0.4s ease;
+  user-select: none;
+  z-index: 1;
+}
+
+.card:hover .cardIndex {
+  color: rgba(74, 144, 226, 0.06);
+  transform: translateY(-5px);
+}
+
+/* Card Content Area */
+.cardContent {
+  position: relative;
+  z-index: 3;
+  transition: transform 0.3s ease;
+}
+
+.category {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #ff5e0e;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #dddddd;
+  line-height: 1.6;
+}
+
+.imageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.projectImage {
+  object-fit: cover;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover .projectImage {
+  opacity: 0.8;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.4) 100%);
+  z-index: 1;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .grid {
+    gap: 3rem;
+  }
+  .card {
+    padding: 3rem 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 6rem 1.5rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .grid > div:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .card {
+    aspect-ratio: 1.15;
+    padding: 2.5rem 2rem;
+  }
+
+  .cardIndex {
+    font-size: 4rem;
+  }
+}
